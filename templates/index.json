@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -6,11 +15,12 @@
         "subtitle": "Bem-vindo à Nossa Loja",
         "title": "Descubra Produtos Incríveis",
         "description": "Qualidade premium com design excepcional",
+        "text_alignment": "left",
         "button_1_text": "Comprar Agora",
         "button_1_link": "/collections/all",
         "button_2_text": "Saiba Mais",
         "button_2_link": "/pages/about",
-        "text_alignment": "left",
+        "background_video": "",
         "use_gradient": true
       }
     },
@@ -20,6 +30,7 @@
         "subtitle": "Produtos",
         "title": "Produtos em Destaque",
         "description": "Confira nossa seleção especial de produtos",
+        "collection": "destaques",
         "products_to_show": 8,
         "show_view_all": true,
         "button_text": "Ver Todos os Produtos"
