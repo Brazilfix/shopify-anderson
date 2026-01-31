@@ -215,8 +215,11 @@
       <span class="product-card__badge product-card__badge--sale">
         {{ 'products.product.on_sale' | t }}
       </span>
-    {% elsif product.published_at and product.published_at > 'now' | date: '%s' | minus: 2592000 %}
-      <span class="product-card__badge product-card__badge--new">Novo</span>
+    {% elsif product.published_at %}
+      {% assign days_since_published = 'now' | date: '%s' | minus: product.published_at | divided_by: 86400 %}
+      {% if days_since_published < 30 %}
+        <span class="product-card__badge product-card__badge--new">Novo</span>
+      {% endif %}
     {% endif %}
   </div>
 
