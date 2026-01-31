@@ -38,7 +38,7 @@
 }
 
 .header__logo img {
-  max-height: 50px;
+  max-height: 80px;
   width: auto;
 }
 
@@ -173,7 +173,7 @@
           </a>
         {% else %}
           <a href="{{ routes.root_url }}" class="header__logo-link">
-            {{ shop.name }}
+            <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" loading="lazy">
           </a>
         {% endif %}
       </div>
