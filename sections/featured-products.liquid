@@ -1,0 +1,154 @@
+<style>
+.featured-products {
+  padding: var(--spacing-3xl) 0;
+}
+
+.featured-products__header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.featured-products__subtitle {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.featured-products__title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: var(--spacing-sm);
+}
+
+.featured-products__description {
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.featured-products__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.featured-products__footer {
+  text-align: center;
+  margin-top: var(--spacing-2xl);
+}
+
+@media (max-width: 768px) {
+  .featured-products__grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--spacing-md);
+  }
+}
+</style>
+
+<section class="featured-products section">
+  <div class="container">
+    <div class="featured-products__header">
+      {% if section.settings.subtitle != blank %}
+        <p class="featured-products__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      
+      {% if section.settings.title != blank %}
+        <h2 class="featured-products__title">{{ section.settings.title }}</h2>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="featured-products__description">{{ section.settings.description }}</p>
+      {% endif %}
+    </div>
+
+    {% if section.settings.collection != blank %}
+      <div class="featured-products__grid">
+        {% for product in collections[section.settings.collection].products limit: section.settings.products_to_show %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.show_view_all %}
+        <div class="featured-products__footer">
+          <a href="{{ collections[section.settings.collection].url }}" class="btn btn--primary btn--large">
+            {{ section.settings.button_text }}
+          </a>
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="featured-products__grid">
+        {% for i in (1..section.settings.products_to_show) %}
+          <div class="card">
+            {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produtos em Destaque",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Conteúdo"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Produtos"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Produtos em Destaque"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descrição",
+      "default": "Confira nossa seleção especial de produtos"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Coleção"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Produtos para Mostrar",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Botão"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Mostrar Botão 'Ver Tudo'",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto do Botão",
+      "default": "Ver Todos os Produtos"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produtos em Destaque"
+    }
+  ]
+}
+{% endschema %}

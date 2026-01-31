@@ -1,0 +1,21 @@
+{
+  "sections": {
+    "main": {
+      "type": "cart-main",
+      "settings": {
+        "show_vendor": true
+      }
+    },
+    "cart-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "title": "Você Também Pode Gostar",
+        "products_to_show": 4
+      }
+    }
+  },
+  "order": [
+    "main",
+    "cart-recommendations"
+  ]
+}

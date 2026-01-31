@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "subtitle": "Bem-vindo à Nossa Loja",
+        "title": "Descubra Produtos Incríveis",
+        "description": "Qualidade premium com design excepcional",
+        "button_1_text": "Comprar Agora",
+        "button_1_link": "/collections/all",
+        "button_2_text": "Saiba Mais",
+        "button_2_link": "/pages/about",
+        "text_alignment": "left",
+        "use_gradient": true
+      }
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "subtitle": "Produtos",
+        "title": "Produtos em Destaque",
+        "description": "Confira nossa seleção especial de produtos",
+        "products_to_show": 8,
+        "show_view_all": true,
+        "button_text": "Ver Todos os Produtos"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "featured-products"
+  ]
+}

@@ -1,0 +1,256 @@
+<style>
+.header {
+  background: var(--color-background);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all var(--transition-base);
+  position: relative;
+  z-index: var(--z-sticky);
+}
+
+{% if settings.enable_sticky_header %}
+.header--sticky {
+  position: sticky;
+  top: 0;
+  box-shadow: var(--shadow-md);
+}
+{% endif %}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-md);
+  gap: var(--spacing-lg);
+}
+
+.header__logo {
+  flex-shrink: 0;
+}
+
+.header__logo-link {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.header__logo img {
+  max-height: 50px;
+  width: auto;
+}
+
+.header__nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav__list {
+  display: flex;
+  list-style: none;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.nav__link {
+  font-weight: 500;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  transition: width var(--transition-base);
+}
+
+.nav__link:hover::after {
+  width: 100%;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.header__icon-btn {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-background-secondary);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.header__icon-btn:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--gradient-accent);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-toggle {
+  display: none;
+}
+
+/* Mobile Menu */
+@media (max-width: 768px) {
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--color-background);
+    box-shadow: var(--shadow-xl);
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    transition: right var(--transition-base);
+    z-index: var(--z-modal);
+  }
+  
+  .header__nav.active {
+    right: 0;
+  }
+  
+  .nav__list {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .mobile-menu-close {
+    position: absolute;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+  }
+}
+
+[data-theme="dark"] .header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+</style>
+
+<header class="header {% if settings.enable_sticky_header %}header--sticky{% endif %}">
+  <div class="container">
+    <div class="header__container">
+      <!-- Logo -->
+      <div class="header__logo">
+        {% if section.settings.logo != blank %}
+          <a href="{{ routes.root_url }}" class="header__logo-link">
+            <img src="{{ section.settings.logo | img_url: '200x' }}" alt="{{ shop.name }}" loading="lazy">
+          </a>
+        {% else %}
+          <a href="{{ routes.root_url }}" class="header__logo-link">
+            {{ shop.name }}
+          </a>
+        {% endif %}
+      </div>
+
+      <!-- Navigation -->
+      <nav class="header__nav" id="mobileMenu">
+        <button class="header__icon-btn mobile-menu-close" id="mobileMenuClose" aria-label="{{ 'general.accessibility.close_menu' | t }}">
+          {% render 'icon-close' %}
+        </button>
+        
+        <ul class="nav__list">
+          {% for link in section.settings.menu.links %}
+            <li class="nav__item">
+              <a href="{{ link.url }}" class="nav__link">
+                {{ link.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header__actions">
+        <!-- Search -->
+        <button class="header__icon-btn" id="searchToggle" aria-label="{{ 'general.search.submit' | t }}">
+          {% render 'icon-search' %}
+        </button>
+
+        <!-- Account -->
+        <a href="{{ routes.account_url }}" class="header__icon-btn" aria-label="{{ 'customer.account.title' | t }}">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z" fill="currentColor"/>
+            <path d="M10 12C4.47715 12 0 14.4772 0 17.5V20H20V17.5C20 14.4772 15.5228 12 10 12Z" fill="currentColor"/>
+          </svg>
+        </a>
+
+        <!-- Cart -->
+        <button class="header__icon-btn" id="cartToggle" aria-label="{{ 'general.cart.title' | t }}">
+          {% render 'icon-cart' %}
+          <span class="cart-count" id="cartCount">{{ cart.item_count }}</span>
+        </button>
+
+        <!-- Dark Mode Toggle -->
+        {% if settings.enable_dark_mode %}
+        <button class="header__icon-btn" id="darkModeToggle" aria-label="Alternar modo escuro">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 3V1M10 19V17M17 10H19M1 10H3M15.657 4.343L17.071 2.929M2.929 17.071L4.343 15.657M15.657 15.657L17.071 17.071M2.929 2.929L4.343 4.343M14 10C14 12.2091 12.2091 14 10 14C7.79086 14 6 12.2091 6 10C6 7.79086 7.79086 6 10 6C12.2091 6 14 7.79086 14 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        {% endif %}
+
+        <!-- Mobile Menu Toggle -->
+        <button class="header__icon-btn mobile-menu-toggle" id="mobileMenuToggle" aria-label="{{ 'general.accessibility.open_menu' | t }}">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Cabeçalho",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

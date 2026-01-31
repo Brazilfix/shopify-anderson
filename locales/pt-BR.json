@@ -1,0 +1,115 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Buscar produtos...",
+      "submit": "Buscar",
+      "no_results": "Nenhum resultado encontrado para \"{{ terms }}\"",
+      "results_with_count": "{{ count }} resultado encontrado para \"{{ terms }}\"",
+      "results_with_count_plural": "{{ count }} resultados encontrados para \"{{ terms }}\""
+    },
+    "cart": {
+      "title": "Carrinho",
+      "empty": "Seu carrinho está vazio",
+      "continue_shopping": "Continuar Comprando",
+      "subtotal": "Subtotal",
+      "checkout": "Finalizar Compra",
+      "view_cart": "Ver Carrinho",
+      "item_added": "Item adicionado ao carrinho"
+    },
+    "404": {
+      "title": "Página não encontrada",
+      "subtitle": "A página que você está procurando não existe.",
+      "back_home": "Voltar para a página inicial"
+    },
+    "accessibility": {
+      "skip_to_content": "Pular para o conteúdo",
+      "close": "Fechar",
+      "menu": "Menu",
+      "open_menu": "Abrir menu",
+      "close_menu": "Fechar menu"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Adicionar ao Carrinho",
+      "sold_out": "Esgotado",
+      "unavailable": "Indisponível",
+      "quantity": "Quantidade",
+      "price": "Preço",
+      "regular_price": "Preço Regular",
+      "sale_price": "Preço Promocional",
+      "on_sale": "Em Promoção",
+      "view_details": "Ver Detalhes",
+      "quick_view": "Visualização Rápida",
+      "choose_options": "Escolher Opções",
+      "from_price": "A partir de {{ price }}",
+      "save": "Economize {{ amount }}"
+    },
+    "filters": {
+      "title": "Filtrar",
+      "clear_all": "Limpar Tudo",
+      "apply": "Aplicar",
+      "sort_by": "Ordenar por",
+      "price_low_high": "Preço: Menor para Maior",
+      "price_high_low": "Preço: Maior para Menor",
+      "title_asc": "A-Z",
+      "title_desc": "Z-A",
+      "newest": "Mais Recentes",
+      "best_selling": "Mais Vendidos"
+    }
+  },
+  "collections": {
+    "general": {
+      "all_collections": "Todas as Coleções",
+      "no_products": "Nenhum produto encontrado",
+      "view_all": "Ver Tudo",
+      "products_count": "{{ count }} produto",
+      "products_count_plural": "{{ count }} produtos"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Minha Conta",
+      "logout": "Sair",
+      "login": "Entrar",
+      "register": "Cadastrar"
+    },
+    "login": {
+      "title": "Entrar",
+      "email": "E-mail",
+      "password": "Senha",
+      "forgot_password": "Esqueceu sua senha?",
+      "sign_in": "Entrar",
+      "new_customer": "Novo cliente?"
+    },
+    "register": {
+      "title": "Criar Conta",
+      "first_name": "Nome",
+      "last_name": "Sobrenome",
+      "email": "E-mail",
+      "password": "Senha",
+      "submit": "Criar Conta"
+    }
+  },
+  "newsletter": {
+    "title": "Assine Nossa Newsletter",
+    "subtitle": "Receba novidades e ofertas exclusivas",
+    "email_placeholder": "Seu e-mail",
+    "submit": "Inscrever-se",
+    "success": "Obrigado por se inscrever!",
+    "error": "Ocorreu um erro. Tente novamente."
+  },
+  "footer": {
+    "copyright": "© {{ year }} {{ shop_name }}. Todos os direitos reservados.",
+    "payment_methods": "Formas de Pagamento"
+  },
+  "blog": {
+    "article": {
+      "read_more": "Ler Mais",
+      "by_author": "Por {{ author }}",
+      "posted_on": "Publicado em {{ date }}",
+      "tags": "Tags",
+      "share": "Compartilhar"
+    }
+  }
+}

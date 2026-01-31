@@ -1,0 +1,264 @@
+<style>
+.hero {
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.hero__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.hero__background img,
+.hero__background video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-overlay);
+  z-index: 0;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  color: white;
+  text-align: {{ section.settings.text_alignment }};
+  {% if section.settings.text_alignment == 'center' %}
+  margin: 0 auto;
+  {% endif %}
+}
+
+.hero__subtitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hero__title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 800;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.1;
+}
+
+.hero__description {
+  font-size: 1.25rem;
+  margin-bottom: var(--spacing-xl);
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.hero__buttons {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  {% if section.settings.text_alignment == 'center' %}
+  justify-content: center;
+  {% endif %}
+}
+
+.hero__button {
+  min-width: 180px;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 500px;
+  }
+  
+  .hero__content {
+    text-align: center;
+  }
+  
+  .hero__buttons {
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .hero__button {
+    width: 100%;
+  }
+}
+
+/* Animated gradient background */
+.hero--gradient {
+  background: var(--gradient-primary);
+  animation: gradientShift 15s ease infinite;
+  background-size: 200% 200%;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+</style>
+
+<section class="hero {% if section.settings.use_gradient %}hero--gradient{% endif %}">
+  {% if section.settings.background_image != blank %}
+    <div class="hero__background">
+      <img 
+        src="{{ section.settings.background_image | img_url: '1920x' }}" 
+        alt="{{ section.settings.title }}"
+        loading="lazy"
+      >
+    </div>
+    <div class="hero__overlay"></div>
+  {% elsif section.settings.background_video != blank %}
+    <div class="hero__background">
+      <video autoplay muted loop playsinline>
+        <source src="{{ section.settings.background_video }}" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero__overlay"></div>
+  {% endif %}
+
+  <div class="container">
+    <div class="hero__content animate-fade-in">
+      {% if section.settings.subtitle != blank %}
+        <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      
+      {% if section.settings.title != blank %}
+        <h1 class="hero__title">{{ section.settings.title }}</h1>
+      {% endif %}
+      
+      {% if section.settings.description != blank %}
+        <p class="hero__description">{{ section.settings.description }}</p>
+      {% endif %}
+      
+      <div class="hero__buttons">
+        {% if section.settings.button_1_text != blank %}
+          <a href="{{ section.settings.button_1_link }}" class="btn btn--primary btn--large hero__button">
+            {{ section.settings.button_1_text }}
+          </a>
+        {% endif %}
+        
+        {% if section.settings.button_2_text != blank %}
+          <a href="{{ section.settings.button_2_link }}" class="btn btn--outline btn--large hero__button">
+            {{ section.settings.button_2_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Conteúdo"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Bem-vindo"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Descubra Nossa Coleção"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descrição",
+      "default": "Produtos de alta qualidade com design excepcional"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alinhamento do Texto",
+      "options": [
+        {
+          "value": "left",
+          "label": "Esquerda"
+        },
+        {
+          "value": "center",
+          "label": "Centro"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Botões"
+    },
+    {
+      "type": "text",
+      "id": "button_1_text",
+      "label": "Texto do Botão 1",
+      "default": "Comprar Agora"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Link do Botão 1"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Texto do Botão 2",
+      "default": "Saiba Mais"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Link do Botão 2"
+    },
+    {
+      "type": "header",
+      "content": "Fundo"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Imagem de Fundo"
+    },
+    {
+      "type": "text",
+      "id": "background_video",
+      "label": "URL do Vídeo de Fundo",
+      "info": "URL completo do vídeo MP4"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_gradient",
+      "label": "Usar Gradiente Animado",
+      "default": false,
+      "info": "Usado quando não há imagem ou vídeo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

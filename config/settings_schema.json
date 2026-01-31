@@ -1,0 +1,197 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Tema Premium",
+    "theme_version": "1.0.0",
+    "theme_author": "Custom Theme",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Cores",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Cores Principais"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Cor Primária",
+        "default": "#6366f1"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Cor Secundária",
+        "default": "#8b5cf6"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Cor de Destaque",
+        "default": "#ec4899"
+      },
+      {
+        "type": "header",
+        "content": "Cores de Texto"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Texto Principal",
+        "default": "#1f2937"
+      },
+      {
+        "type": "color",
+        "id": "color_text_secondary",
+        "label": "Texto Secundário",
+        "default": "#6b7280"
+      },
+      {
+        "type": "header",
+        "content": "Cores de Fundo"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Fundo Principal",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_background_secondary",
+        "label": "Fundo Secundário",
+        "default": "#f9fafb"
+      }
+    ]
+  },
+  {
+    "name": "Tipografia",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Fontes"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_heading",
+        "label": "Fonte dos Títulos",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "font_body",
+        "label": "Fonte do Texto",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "range",
+        "id": "font_size_base",
+        "label": "Tamanho Base da Fonte",
+        "min": 14,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "default": 16
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Configurações de Layout"
+      },
+      {
+        "type": "range",
+        "id": "layout_max_width",
+        "label": "Largura Máxima do Conteúdo",
+        "min": 1200,
+        "max": 1600,
+        "step": 50,
+        "unit": "px",
+        "default": 1400
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sticky_header",
+        "label": "Ativar Cabeçalho Fixo",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Recursos",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Funcionalidades"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_dark_mode",
+        "label": "Ativar Modo Escuro",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_ajax_cart",
+        "label": "Ativar Carrinho Ajax",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_quick_view",
+        "label": "Ativar Visualização Rápida",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_animations",
+        "label": "Ativar Animações",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Redes Sociais",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Links das Redes Sociais"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram",
+        "info": "URL completo do perfil"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook",
+        "info": "URL completo da página"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter",
+        "label": "Twitter/X",
+        "info": "URL completo do perfil"
+      },
+      {
+        "type": "text",
+        "id": "social_youtube",
+        "label": "YouTube",
+        "info": "URL completo do canal"
+      },
+      {
+        "type": "text",
+        "id": "social_tiktok",
+        "label": "TikTok",
+        "info": "URL completo do perfil"
+      }
+    ]
+  }
+]
