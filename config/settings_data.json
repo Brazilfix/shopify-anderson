@@ -1,0 +1,18 @@
+{
+  "current": {
+    "color_primary": "#6366f1",
+    "color_secondary": "#8b5cf6",
+    "color_accent": "#ec4899",
+    "color_text": "#1f2937",
+    "color_text_secondary": "#6b7280",
+    "color_background": "#B2BEF3",
+    "color_background_secondary": "#f9fafb",
+    "font_size_base": 16,
+    "layout_max_width": 1400,
+    "enable_sticky_header": true,
+    "enable_dark_mode": true,
+    "enable_ajax_cart": true,
+    "enable_quick_view": true,
+    "enable_animations": true
+  }
+}

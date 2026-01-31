@@ -23,7 +23,6 @@ Temporary Items
 .apdisk
 
 # Shopify
-config/settings_data.json
 *.zip
 
 # Node
