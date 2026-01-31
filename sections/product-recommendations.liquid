@@ -1,0 +1,104 @@
+<style>
+.product-recommendations {
+  padding: var(--spacing-3xl) 0;
+  background: var(--color-background-secondary);
+}
+
+.product-recommendations__header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.product-recommendations__title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.product-recommendations__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .product-recommendations__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+</style>
+
+<section class="product-recommendations" data-product-id="{{ product.id }}">
+  <div class="container">
+    <div class="product-recommendations__header">
+      <h2 class="product-recommendations__title">
+        {% if section.settings.title != blank %}
+          {{ section.settings.title }}
+        {% else %}
+          Você Também Pode Gostar
+        {% endif %}
+      </h2>
+    </div>
+
+    <div class="product-recommendations__grid" id="recommendations">
+      {% comment %} Recommendations will be loaded here {% endcomment %}
+    </div>
+  </div>
+</section>
+
+<script>
+// Load product recommendations
+fetch(`/recommendations/products.json?product_id={{ product.id }}&limit={{ section.settings.products_to_show | default: 4 }}`)
+  .then(response => response.json())
+  .then(data => {
+    const container = document.getElementById('recommendations');
+    
+    if (data.products && data.products.length > 0) {
+      // Show recommendations (simplified version - you'd render product cards here)
+      container.innerHTML = data.products.map(product => `
+        <div class="card product-card">
+          <a href="${product.url}" class="product-card__image-wrapper">
+            <img src="${product.featured_image}" alt="${product.title}" class="product-card__image">
+          </a>
+          <div class="product-card__info">
+            <h3 class="product-card__title">
+              <a href="${product.url}">${product.title}</a>
+            </h3>
+            <div class="product-card__price">
+              <span class="product-card__price-regular">${Shopify.formatMoney(product.price)}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    } else {
+      // Hide section if no recommendations
+      document.querySelector('.product-recommendations').style.display = 'none';
+    }
+  })
+  .catch(error => {
+    console.error('Error loading recommendations:', error);
+    document.querySelector('.product-recommendations').style.display = 'none';
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Recomendações de Produtos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Você Também Pode Gostar"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Produtos para Mostrar",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    }
+  ]
+}
+{% endschema %}

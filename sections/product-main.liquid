@@ -1,0 +1,247 @@
+<style>
+.product-main {
+  padding: var(--spacing-3xl) 0;
+}
+
+.product-main__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-2xl);
+  align-items: start;
+}
+
+.product-main__gallery {
+  position: sticky;
+  top: 100px;
+}
+
+.product-main__image-main {
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  margin-bottom: var(--spacing-md);
+  aspect-ratio: 1 / 1;
+  background: var(--color-background-secondary);
+}
+
+.product-main__image-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-main__thumbnails {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: var(--spacing-sm);
+}
+
+.product-main__thumbnail {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color var(--transition-fast);
+}
+
+.product-main__thumbnail.active {
+  border-color: var(--color-primary);
+}
+
+.product-main__thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-main__info {
+  max-width: 600px;
+}
+
+.product-main__vendor {
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.product-main__title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: var(--spacing-md);
+}
+
+.product-main__price {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.product-main__price--compare {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+  text-decoration: line-through;
+  margin-left: var(--spacing-sm);
+}
+
+.product-main__description {
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.7;
+}
+
+.product-main__form {
+  margin-bottom: var(--spacing-lg);
+}
+
+.product-main__variants {
+  margin-bottom: var(--spacing-lg);
+}
+
+.product-main__variant-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.product-main__quantity {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.product-main__qty-input {
+  width: 100px;
+}
+
+@media (max-width: 768px) {
+  .product-main__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .product-main__gallery {
+    position: static;
+  }
+}
+</style>
+
+<section class="product-main">
+  <div class="container">
+    <div class="product-main__grid">
+      <!-- Gallery -->
+      <div class="product-main__gallery">
+        <div class="product-main__image-main" id="mainImage">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: '1000x' }}" alt="{{ product.title | escape }}">
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {% endif %}
+        </div>
+        
+        {% if product.images.size > 1 %}
+          <div class="product-main__thumbnails">
+            {% for image in product.images %}
+              <div class="product-main__thumbnail {% if forloop.first %}active{% endif %}" data-image="{{ image | img_url: '1000x' }}">
+                <img src="{{ image | img_url: '200x' }}" alt="{{ product.title | escape }}">
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-main__info">
+        {% if section.settings.show_vendor and product.vendor %}
+          <p class="product-main__vendor">{{ product.vendor }}</p>
+        {% endif %}
+        
+        <h1 class="product-main__title">{{ product.title }}</h1>
+        
+        <div class="product-main__price">
+          {{ product.price | money }}
+          {% if product.compare_at_price > product.price %}
+            <span class="product-main__price--compare">{{ product.compare_at_price | money }}</span>
+          {% endif %}
+        </div>
+        
+        {% if product.description != blank %}
+          <div class="product-main__description">
+            {{ product.description }}
+          </div>
+        {% endif %}
+        
+        {% form 'product', product, class: 'product-main__form' %}
+          {% if product.variants.size > 1 %}
+            <div class="product-main__variants">
+              <label class="product-main__variant-label" for="variant-select">
+                Opções
+              </label>
+              <select name="id" id="variant-select" class="form-select">
+                {% for variant in product.variants %}
+                  <option value="{{ variant.id }}" {% if variant == product.selected_or_first_available_variant %}selected{% endif %}>
+                    {{ variant.title }} - {{ variant.price | money }}
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+          {% else %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+          {% endif %}
+          
+          <div class="product-main__quantity">
+            <label class="product-main__variant-label" for="quantity">Quantidade</label>
+            <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-input product-main__qty-input">
+          </div>
+          
+          <button type="submit" class="btn btn--primary btn--large" style="width: 100%;" {% unless product.available %}disabled{% endunless %}>
+            {% if product.available %}
+              {{ 'products.product.add_to_cart' | t }}
+            {% else %}
+              {{ 'products.product.sold_out' | t }}
+            {% endif %}
+          </button>
+        {% endform %}
+        
+        {% if section.settings.show_sku and product.selected_or_first_available_variant.sku != blank %}
+          <p style="margin-top: var(--spacing-md); font-size: 0.875rem; color: var(--color-text-secondary);">
+            SKU: {{ product.selected_or_first_available_variant.sku }}
+          </p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Image gallery
+document.querySelectorAll('.product-main__thumbnail').forEach(thumb => {
+  thumb.addEventListener('click', function() {
+    document.querySelectorAll('.product-main__thumbnail').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    
+    const mainImage = document.querySelector('#mainImage img');
+    mainImage.src = this.dataset.image;
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Produto Principal",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Mostrar Fornecedor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "label": "Mostrar SKU",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

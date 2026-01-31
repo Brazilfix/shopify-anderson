@@ -1,0 +1,144 @@
+<style>
+.cart-main {
+  padding: var(--spacing-3xl) 0;
+  min-height: 60vh;
+}
+
+.cart-main__header {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.cart-main__title {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+.cart-main__empty {
+  text-align: center;
+  padding: var(--spacing-3xl) 0;
+}
+
+.cart-main__empty-icon {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto var(--spacing-lg);
+  opacity: 0.3;
+}
+
+.cart-main__grid {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--spacing-2xl);
+  align-items: start;
+}
+
+.cart-main__items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.cart-main__sidebar {
+  position: sticky;
+  top: 100px;
+  background: var(--color-background-secondary);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+}
+
+.cart-main__summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-sm) 0;
+}
+
+.cart-main__summary-row--total {
+  border-top: 2px solid var(--color-text);
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.cart-main__note {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin: var(--spacing-md) 0;
+}
+
+@media (max-width: 768px) {
+  .cart-main__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cart-main__sidebar {
+    position: static;
+  }
+}
+</style>
+
+<section class="cart-main">
+  <div class="container">
+    <div class="cart-main__header">
+      <h1 class="cart-main__title">{{ 'general.cart.title' | t }}</h1>
+    </div>
+
+    {% if cart.item_count == 0 %}
+      <div class="cart-main__empty">
+        <div class="cart-main__empty-icon">
+          {% render 'icon-cart' %}
+        </div>
+        <h2>{{ 'general.cart.empty' | t }}</h2>
+        <p style="margin: var(--spacing-md) 0;">Adicione alguns produtos ao seu carrinho para começar.</p>
+        <a href="/collections/all" class="btn btn--primary btn--large">
+          {{ 'general.cart.continue_shopping' | t }}
+        </a>
+      </div>
+    {% else %}
+      <form action="{{ routes.cart_url }}" method="post" class="cart-main__grid">
+        <div class="cart-main__items">
+          {% for item in cart.items %}
+            {% render 'product-card', product: item.product %}
+          {% endfor %}
+        </div>
+
+        <div class="cart-main__sidebar">
+          <h3 style="margin-bottom: var(--spacing-md);">Resumo do Pedido</h3>
+          
+          <div class="cart-main__summary-row">
+            <span>Subtotal</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          
+          <p class="cart-main__note">Frete e impostos calculados no checkout</p>
+          
+          <div class="cart-main__summary-row cart-main__summary-row--total">
+            <span>Total</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+          
+          <button type="submit" name="checkout" class="btn btn--primary btn--large" style="width: 100%; margin-top: var(--spacing-lg);">
+            {{ 'general.cart.checkout' | t }}
+          </button>
+          
+          <a href="/collections/all" class="btn btn--secondary" style="width: 100%; margin-top: var(--spacing-sm);">
+            {{ 'general.cart.continue_shopping' | t }}
+          </a>
+        </div>
+      </form>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Carrinho Principal",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Mostrar Fornecedor",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

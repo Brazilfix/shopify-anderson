@@ -1,0 +1,53 @@
+<style>
+.collection-header {
+  padding: var(--spacing-2xl) 0;
+  text-align: center;
+  background: var(--color-background-secondary);
+}
+
+.collection-header__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: var(--spacing-sm);
+}
+
+.collection-header__description {
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+.collection-header__count {
+  margin-top: var(--spacing-md);
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+}
+</style>
+
+<section class="collection-header">
+  <div class="container">
+    <h1 class="collection-header__title">{{ collection.title }}</h1>
+    
+    {% if collection.description != blank %}
+      <div class="collection-header__description">
+        {{ collection.description }}
+      </div>
+    {% endif %}
+    
+    <p class="collection-header__count">
+      {{ collection.products_count }} 
+      {% if collection.products_count == 1 %}
+        produto
+      {% else %}
+        produtos
+      {% endif %}
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cabeçalho da Coleção",
+  "settings": []
+}
+{% endschema %}

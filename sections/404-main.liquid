@@ -1,0 +1,94 @@
+<style>
+.error-404 {
+  text-align: center;
+  padding: var(--spacing-3xl) 0;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-404__content {
+  max-width: 600px;
+}
+
+.error-404__code {
+  font-size: clamp(4rem, 15vw, 8rem);
+  font-weight: 800;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: var(--spacing-md);
+}
+
+.error-404__title {
+  margin-bottom: var(--spacing-md);
+}
+
+.error-404__text {
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+  font-size: 1.125rem;
+}
+</style>
+
+<section class="error-404">
+  <div class="container">
+    <div class="error-404__content">
+      <div class="error-404__code">404</div>
+      
+      {% if section.settings.title != blank %}
+        <h1 class="error-404__title">{{ section.settings.title }}</h1>
+      {% else %}
+        <h1 class="error-404__title">{{ 'general.404.title' | t }}</h1>
+      {% endif %}
+      
+      {% if section.settings.subtitle != blank %}
+        <p class="error-404__text">{{ section.settings.subtitle }}</p>
+      {% else %}
+        <p class="error-404__text">{{ 'general.404.subtitle' | t }}</p>
+      {% endif %}
+      
+      <a href="{{ section.settings.button_link | default: routes.root_url }}" class="btn btn--primary btn--large">
+        {% if section.settings.button_text != blank %}
+          {{ section.settings.button_text }}
+        {% else %}
+          {{ 'general.404.back_home' | t }}
+        {% endif %}
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Página 404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Página Não Encontrada"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "A página que você está procurando não existe."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto do Botão",
+      "default": "Voltar para a Página Inicial"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link do Botão"
+    }
+  ]
+}
+{% endschema %}
