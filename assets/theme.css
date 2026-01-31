@@ -1,9 +1,9 @@
 /* ========================================
-   DESIGN SYSTEM & CSS VARIABLES
+   DESIGN SYSTEM & CSS VARIABLES - GUUD STYLE
    ======================================== */
 
 :root {
-  /* Colors */
+  /* Guud Brand Colors */
   --color-primary: {{ settings.color_primary }};
   --color-secondary: {{ settings.color_secondary }};
   --color-accent: {{ settings.color_accent }};
@@ -22,31 +22,33 @@
   --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
   --font-size-base: {{ settings.font_size_base }}px;
   
-  /* Spacing */
+  /* Spacing - Shapes Style (Generous) */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
-  --spacing-lg: 2rem;
-  --spacing-xl: 3rem;
-  --spacing-2xl: 4rem;
-  --spacing-3xl: 6rem;
+  --spacing-lg: 2.5rem;
+  --spacing-xl: 3.5rem;
+  --spacing-2xl: 5rem;
+  --spacing-3xl: 7rem;
   
   /* Layout */
   --max-width: {{ settings.layout_max_width }}px;
-  --border-radius: 12px;
-  --border-radius-sm: 8px;
-  --border-radius-lg: 16px;
+  --border-radius: 16px;        /* Shapes style - more rounded */
+  --border-radius-sm: 12px;
+  --border-radius-lg: 24px;
+  --border-radius-xl: 32px;
+  --border-radius-pill: 50px;   /* Pill-shaped buttons */
   
-  /* Shadows */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
-  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.2);
+  /* Shadows - Softer, more diffuse */
+  --shadow-sm: 0 2px 12px rgba(68, 59, 130, 0.08);
+  --shadow-md: 0 4px 20px rgba(68, 59, 130, 0.12);
+  --shadow-lg: 0 8px 32px rgba(68, 59, 130, 0.16);
+  --shadow-xl: 0 16px 48px rgba(68, 59, 130, 0.2);
   
   /* Transitions */
-  --transition-fast: 150ms ease;
-  --transition-base: 250ms ease;
-  --transition-slow: 350ms ease;
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Z-index */
   --z-dropdown: 1000;
@@ -64,8 +66,8 @@
   --color-text-secondary: #d1d5db;
   --color-background: #111827;
   --color-background-secondary: #1f2937;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
 }
 
@@ -83,13 +85,14 @@ html {
   font-size: var(--font-size-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-body);
   color: var(--color-text);
   background-color: var(--color-background);
-  line-height: 1.6;
+  line-height: 1.7;
   transition: background-color var(--transition-base), color var(--transition-base);
 }
 
@@ -124,18 +127,20 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-accent);
 }
 
-h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
-h4 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
-h5 { font-size: 1.125rem; }
-h6 { font-size: 1rem; }
+h1 { font-size: clamp(2.25rem, 6vw, 4rem); }
+h2 { font-size: clamp(1.875rem, 5vw, 3rem); }
+h3 { font-size: clamp(1.5rem, 4vw, 2.25rem); }
+h4 { font-size: clamp(1.25rem, 3vw, 1.75rem); }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1.125rem; }
 
 p {
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  line-height: 1.8;
 }
 
 .text-gradient {
@@ -152,12 +157,12 @@ p {
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--spacing-lg);
 }
 
 .main-content {
   min-height: 60vh;
-  padding: var(--spacing-2xl) 0;
+  padding: var(--spacing-3xl) 0;
 }
 
 .section {
@@ -165,7 +170,7 @@ p {
 }
 
 .section--small {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-2xl) 0;
 }
 
 .grid {
@@ -186,7 +191,7 @@ p {
 }
 
 /* ========================================
-   BUTTONS
+   BUTTONS - SHAPES STYLE
    ======================================== */
 
 .btn {
@@ -194,16 +199,17 @@ p {
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xs);
-  padding: 0.875rem 2rem;
+  padding: 1rem 2.5rem;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-pill);  /* Pill-shaped */
   transition: all var(--transition-base);
   cursor: pointer;
   border: none;
   text-align: center;
   position: relative;
   overflow: hidden;
+  letter-spacing: 0.3px;
 }
 
 .btn::before {
@@ -225,19 +231,19 @@ p {
 }
 
 .btn--primary {
-  background: var(--gradient-primary);
+  background: var(--color-primary);
   color: white;
   box-shadow: var(--shadow-md);
 }
 
 .btn--primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow: var(--shadow-lg);
 }
 
 .btn--secondary {
-  background: var(--color-background-secondary);
-  color: var(--color-text);
+  background: var(--color-secondary);
+  color: var(--color-accent);
   border: 2px solid var(--color-primary);
 }
 
@@ -248,23 +254,23 @@ p {
 
 .btn--outline {
   background: transparent;
-  color: var(--color-text);
-  border: 2px solid currentColor;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
 }
 
 .btn--outline:hover {
-  background: var(--color-text);
-  color: var(--color-background);
+  background: var(--color-primary);
+  color: white;
 }
 
 .btn--large {
-  padding: 1.125rem 2.5rem;
+  padding: 1.25rem 3rem;
   font-size: 1.125rem;
 }
 
 .btn--small {
-  padding: 0.625rem 1.25rem;
-  font-size: 0.875rem;
+  padding: 0.75rem 1.75rem;
+  font-size: 0.9375rem;
 }
 
 .btn:disabled {
@@ -274,7 +280,7 @@ p {
 }
 
 /* ========================================
-   CARDS
+   CARDS - SHAPES STYLE
    ======================================== */
 
 .card {
@@ -283,17 +289,19 @@ p {
   overflow: hidden;
   transition: all var(--transition-base);
   box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(68, 59, 130, 0.08);
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-xl);
 }
 
 .card__image {
   position: relative;
   overflow: hidden;
   aspect-ratio: 1 / 1;
+  background: var(--color-background-secondary);
 }
 
 .card__image img {
@@ -304,29 +312,31 @@ p {
 }
 
 .card:hover .card__image img {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .card__content {
-  padding: var(--spacing-md);
+  padding: var(--spacing-lg);
 }
 
 .card__title {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-accent);
 }
 
 .card__text {
   color: var(--color-text-secondary);
-  font-size: 0.9375rem;
+  font-size: 1rem;
+  line-height: 1.7;
 }
 
 /* Glassmorphism Card */
 .card--glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(178, 190, 243, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(178, 190, 243, 0.3);
 }
 
 [data-theme="dark"] .card--glass {
@@ -344,16 +354,17 @@ p {
 
 .form-label {
   display: block;
-  margin-bottom: var(--spacing-xs);
-  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
   font-size: 0.9375rem;
+  color: var(--color-accent);
 }
 
 .form-input,
 .form-select,
 .form-textarea {
   width: 100%;
-  padding: 0.875rem 1rem;
+  padding: 1rem 1.25rem;
   font-size: 1rem;
   font-family: inherit;
   color: var(--color-text);
@@ -368,12 +379,13 @@ p {
 .form-textarea:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  box-shadow: 0 0 0 4px rgba(68, 59, 130, 0.1);
+  background: white;
 }
 
 .form-textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 140px;
 }
 
 /* ========================================
@@ -417,7 +429,7 @@ p {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -439,7 +451,7 @@ p {
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 
@@ -461,8 +473,8 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
+  background: rgba(46, 36, 82, 0.75);
+  backdrop-filter: blur(6px);
   z-index: var(--z-modal-backdrop);
   opacity: 0;
   visibility: hidden;
@@ -480,9 +492,14 @@ p {
 
 @media (max-width: 768px) {
   :root {
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
-    --spacing-3xl: 4rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2.5rem;
+    --spacing-2xl: 3.5rem;
+    --spacing-3xl: 5rem;
+  }
+  
+  .container {
+    padding: 0 var(--spacing-md);
   }
   
   .grid--2,
