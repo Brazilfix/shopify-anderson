@@ -1,26 +1,26 @@
 /* ========================================
-   DESIGN SYSTEM & CSS VARIABLES - GUUD STYLE
+   DESIGN SYSTEM - GUUD COLORS (HARD-CODED)
    ======================================== */
 
 :root {
-  /* Guud Brand Colors */
-  --color-primary: {{ settings.color_primary }};
-  --color-secondary: {{ settings.color_secondary }};
-  --color-accent: {{ settings.color_accent }};
-  --color-text: {{ settings.color_text }};
-  --color-text-secondary: {{ settings.color_text_secondary }};
-  --color-background: {{ settings.color_background }};
-  --color-background-secondary: {{ settings.color_background_secondary }};
+  /* Guud Brand Colors - Fixed */
+  --color-primary: #443B82;
+  --color-secondary: #B2BEF3;
+  --color-accent: #2E2452;
+  --color-text: #403862;
+  --color-text-secondary: #6b7280;
+  --color-background: #FFFFFF;
+  --color-background-secondary: #F5F7FF;
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-  --gradient-accent: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent) 100%);
+  --gradient-primary: linear-gradient(135deg, #443B82 0%, #B2BEF3 100%);
+  --gradient-accent: linear-gradient(135deg, #B2BEF3 0%, #2E2452 100%);
   --gradient-overlay: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
   
   /* Typography */
-  --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-  --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-  --font-size-base: {{ settings.font_size_base }}px;
+  --font-heading: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-size-base: 16px;
   
   /* Spacing - Shapes Style (Generous) */
   --spacing-xs: 0.5rem;
@@ -32,14 +32,14 @@
   --spacing-3xl: 7rem;
   
   /* Layout */
-  --max-width: {{ settings.layout_max_width }}px;
-  --border-radius: 16px;        /* Shapes style - more rounded */
+  --max-width: 1400px;
+  --border-radius: 16px;
   --border-radius-sm: 12px;
   --border-radius-lg: 24px;
   --border-radius-xl: 32px;
-  --border-radius-pill: 50px;   /* Pill-shaped buttons */
+  --border-radius-pill: 50px;
   
-  /* Shadows - Softer, more diffuse */
+  /* Shadows - Softer with brand color */
   --shadow-sm: 0 2px 12px rgba(68, 59, 130, 0.08);
   --shadow-md: 0 4px 20px rgba(68, 59, 130, 0.12);
   --shadow-lg: 0 8px 32px rgba(68, 59, 130, 0.16);
@@ -202,7 +202,7 @@ p {
   padding: 1rem 2.5rem;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: var(--border-radius-pill);  /* Pill-shaped */
+  border-radius: var(--border-radius-pill);
   transition: all var(--transition-base);
   cursor: pointer;
   border: none;
