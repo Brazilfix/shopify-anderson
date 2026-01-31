@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Tema Premium",
+    "theme_name": "Shopify Anderson",
     "theme_version": "1.0.0",
-    "theme_author": "Custom Theme",
-    "theme_documentation_url": "",
-    "theme_support_url": ""
+    "theme_author": "Anderson Costa",
+    "theme_documentation_url": "https://github.com/Brazilfix/shopify-anderson",
+    "theme_support_url": "https://github.com/Brazilfix/shopify-anderson/issues"
   },
   {
     "name": "Cores",

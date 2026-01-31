@@ -1,4 +1,4 @@
-# Tema Premium Shopify
+# Shopify Anderson
 
 Um tema Shopify moderno e totalmente customizado, desenvolvido em português com design premium e recursos avançados.
 
