@@ -19,8 +19,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--spacing-md) var(--spacing-md);
+  padding: 1rem var(--spacing-md); /* Reduced from spacing-md (approx 1.5rem) to 1rem for slimmer look */
   gap: var(--spacing-lg);
+  height: 80px; /* Enforce specific height */
 }
 
 .header__logo {
@@ -160,6 +161,30 @@
 [data-theme="dark"] .header {
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
+
+.header__cta-btn {
+  padding: 0.5rem 1.5rem;
+  background-color: var(--color-primary); /* Roxo do tema */
+  color: white;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.header__cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3); 
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .header__cta-btn {
+    display: none; /* Ocultar em mobile se necessário ou ajustar */
+  }
+}
 </style>
 
 <header class="header {% if settings.enable_sticky_header %}header--sticky{% endif %}">
@@ -184,9 +209,6 @@
         
         <ul class="nav__list">
           <li class="nav__item">
-            <a href="/collections/all" class="nav__link">Comprar</a>
-          </li>
-          <li class="nav__item">
             <a href="/collections/combos" class="nav__link">Combos</a>
           </li>
           <li class="nav__item">
@@ -200,6 +222,11 @@
 
       <!-- Actions -->
       <div class="header__actions">
+        
+        <a href="/collections/all" class="btn btn--primary header__cta-btn">
+          Compre Agora
+        </a>
+
         <!-- Search -->
         <button class="header__icon-btn" id="searchToggle" aria-label="{{ 'general.search.submit' | t }}">
           {% render 'icon-search' %}
