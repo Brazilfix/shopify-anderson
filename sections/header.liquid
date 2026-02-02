@@ -1,6 +1,7 @@
 <style>
 .header {
-  background: #B2BEF3;
+  background: #2E0249; /* Roxo escuro para contraste com logo branca */
+  color: white; /* Letras brancas */
   border-bottom: 1px solid rgba(68, 59, 130, 0.15);
   transition: all var(--transition-base);
   position: relative;
@@ -39,7 +40,7 @@
 }
 
 .header__logo img {
-  max-height: 80px;
+  max-height: 60px; /* Reduzido de 80px para ficar mais estético */
   width: auto;
 }
 
@@ -182,7 +183,24 @@
 
 @media (max-width: 768px) {
   .header__cta-btn {
-    display: none; /* Ocultar em mobile se necessário ou ajustar */
+    display: none;
+  }
+  
+  /* Mobile Optimizations: Hide non-essential icons */
+  #searchToggle,
+  #darkModeToggle,
+  [href*="/account"] {
+    display: none !important;
+  }
+
+  /* Adjust icon size for mobile */
+  .header__icon-btn {
+    width: 36px; 
+    height: 36px;
+  }
+
+  .header__actions {
+    gap: 0.5rem;
   }
 }
 </style>
