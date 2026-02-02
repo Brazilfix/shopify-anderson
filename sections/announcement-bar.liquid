@@ -1,0 +1,48 @@
+<style>
+  .announcement-bar {
+    background-color: #FFFFFF;
+    color: #4B0082; /* Indigo/Dark Purple */
+    padding: 10px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    z-index: 50;
+    border-bottom: 1px solid rgba(75, 0, 130, 0.1);
+  }
+
+  .announcement-bar__content {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Pause on hover */
+  .announcement-bar:hover .announcement-bar__content {
+    animation-play-state: paused;
+  }
+</style>
+
+<div class="announcement-bar">
+  <div class="announcement-bar__content">
+    FRETE GRATIS A PARTIR DE 199 &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; FRETE GRATIS A PARTIR DE 199 &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; FRETE GRATIS A PARTIR DE 199 &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; FRETE GRATIS A PARTIR DE 199
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Barra de Anúncio",
+  "settings": []
+}
+{% endschema %}
